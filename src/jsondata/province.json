@@ -1,0 +1,62 @@
+[
+  {
+    "name": "TP. HCM",
+    "id": "217"
+  },
+  {
+    "name": "Hà Nội",
+    "id": "218"
+  },
+  {
+    "name": "Đà Nẵng",
+    "id": "219"
+  },
+  {
+    "name": "Cần Thơ",
+    "id": "221"
+  },
+  {
+    "name": "Khánh Hoà",
+    "id": "248"
+  },
+  {
+    "name": "Vũng Tàu",
+    "id": "223"
+  },
+  {
+    "name": "Hải Phòng",
+    "id": "220"
+  },
+  {
+    "name": "Bình Thuận",
+    "id": "233"
+  },
+  {
+    "name": "Lâm Đồng",
+    "id": "254"
+  },
+  {
+    "name": "Đồng Nai",
+    "id": "222"
+  },
+  {
+    "name": "Quảng Ninh",
+    "id": "265"
+  },
+  {
+    "name": "Huế",
+    "id": "273"
+  },
+  {
+    "name": "Bình Dương",
+    "id": "230"
+  },
+  {
+    "name": "Hải Dương",
+    "id": "244"
+  },
+  {
+    "name": "Ninh Thuận",
+    "id": "259"
+  }
+]
