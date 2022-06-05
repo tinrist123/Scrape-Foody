@@ -64,7 +64,11 @@ const migrateDish = async () => {
                 discount_price: dish.discount_price
                   ? dish.discount_price.text
                   : "0",
-                photo: dish.photos.map((pho) => pho.value),
+                photo: dish.photos.map((pho) => ({
+                  width: pho.width,
+                  height: pho.height,
+                  value: pho.value,
+                })),
                 fake_id: dish.id,
               });
 

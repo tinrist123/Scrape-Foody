@@ -12,7 +12,7 @@ try {
     // migrateProvince();
     // migrateDistrict();
     // mirgateRestaurant();
-    // migrateDish();
+    migrateDish();
     // migrateComment();
   });
 } catch (error) {

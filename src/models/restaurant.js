@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const restaunrant_type = require("./restaurant_type");
 const province = require("./province");
 const district = require("./district");
+const image = require("./image");
 
 const RestaurantSchema = mongoose.Schema(
   {
@@ -18,10 +19,18 @@ const RestaurantSchema = mongoose.Schema(
     phone: String,
     rating: Number,
     short_description: String,
-    photos: {
-      type: [String],
-      default: [],
-    },
+    photos: [
+      {
+        type: [
+          {
+            width: Number,
+            height: Number,
+            value: String,
+          },
+        ],
+        default: [],
+      },
+    ],
     lat: Number,
     lng: Number,
     price_range: {

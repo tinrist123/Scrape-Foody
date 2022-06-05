@@ -27,11 +27,16 @@ const migrateRestaurant = async () => {
 
     if (restaurant.res_photos) {
       if (restaurant.res_photos.length > 0) {
-        photo = restaurant.res_photos.map(
-          (obj) => obj.photos[obj.photos.length - 1].value
+        photo = restaurant.res_photos.map((obj) =>
+          obj.photos.map((photo) => ({
+            width: photo.width,
+            value: photo.value,
+            height: photo.height,
+          }))
         );
       }
     }
+    // console.log(photo);
 
     if (restaurant.phones?.length > 0) {
       phone = restaurant.phones[0];
@@ -51,7 +56,7 @@ const migrateRestaurant = async () => {
       rating: avgRating,
       phone: phone,
       short_description: restaurant.short_description,
-      photos: photo,
+      photos: [...photo],
       lat: restaurant.position?.latitude,
       lng: restaurant.position?.longitude,
       fake_id: restaurant.restaurant_id,
@@ -88,29 +93,6 @@ const migrateRestaurant = async () => {
     if (provinceDB) return provinceDB._id;
     return "";
   };
-
-  // const callAPIGetDish = async (restaurant_id) => {
-  //   let API_GETALL_RESTAURANT = `https://gappapi.deliverynow.vn/api/dish/get_delivery_dishes?request_id=${restaurant_id}&id_type=1`;
-  //   axios.defaults.headers.common["x-foody-api-version"] = "1";
-  //   axios.defaults.headers.common["x-foody-app-type"] = "1004";
-  //   axios.defaults.headers.common["x-foody-client-id"] = "";
-  //   axios.defaults.headers.common["x-foody-client-language"] = "vi";
-  //   axios.defaults.headers.common["x-foody-client-type"] = "1";
-  //   axios.defaults.headers.common["x-foody-client-version"] = "1";
-  //   return axios(API_GETALL_RESTAURANT)
-  //     .then((res) => {
-  //       if (res.data.result == "success") {
-  //         console.log(count);
-  //         return res.data.reply.menu_infos;
-  //       }
-  //       return "";
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       console.log(API_GETALL_RESTAURANT);
-  //       return "";
-  //     });
-  // };
 
   await Promise.all(
     lstRestaurant.map((restaurant) => createRestaurant(restaurant))
