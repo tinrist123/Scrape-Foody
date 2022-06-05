@@ -1,19 +1,44 @@
 const express = require("express");
 const app = express();
 
-const { Server } = require("socket.io");
 const http = require("http");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const {
+  province,
+  district,
+  menu,
+  menu_detail,
+  restaurant,
+} = require("./src/routes");
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("swagger-jsdoc");
+
+const swaggerOption = {
+  swaggerDefinition: {
+    info: {
+      title: "Foody API",
+      description: "Foody Description",
+      contact: {
+        name: "noname Developer",
+      },
+      servers: ["http://localhost:3333"],
+    },
+  },
+  apis: ["app.js"],
+};
+
+const swaggerDocs = swaggerDocument(swaggerOption);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 require("dotenv/config");
 
 //Import Routes
-
 app.use(express.json());
 app.use(morgan("tiny"));
-
 app.use(cors());
 // app.all("*", (req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -30,11 +55,12 @@ app.use(cors());
 // });
 
 //HOMEPAGE
-// app
-//   .use("/user", userRoute)
-//   .use("/passion", passionRoute)
-//   .use("/college", collegeRoute)
-//   .use("/chat", chatRoute);
+app
+  .use("/province", province)
+  .use("/district", district)
+  .use("/menu", menu)
+  .use("/restaurant", restaurant)
+  .use("/menu_detail", menu_detail);
 
 app.use("*", (req, res) => {
   return res.status(404).json({
@@ -48,4 +74,7 @@ mongoose.connect(process.env.DB_CONNECTION, () => {
   console.log("connect to DB");
 });
 
-server.listen(3333);
+const PORT = process.env.PORT || 3333;
+app.listen(PORT, () => {
+  console.log(`Our app is running on port http://localhost:${PORT}`);
+});
