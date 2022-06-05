@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
-const restaunrant_type = require("./restaunrant_type");
+const restaunrant_type = require("./restaurant_type");
+const province = require("./province");
+const district = require("./district");
 
 const RestaurantSchema = mongoose.Schema(
   {
@@ -9,7 +11,10 @@ const RestaurantSchema = mongoose.Schema(
       ref: restaunrant_type,
     },
     address_detail: String,
-    open_time: String,
+    open_time: {
+      type: [String],
+      default: [],
+    },
     phone: String,
     rating: Number,
     short_description: String,
@@ -22,6 +27,15 @@ const RestaurantSchema = mongoose.Schema(
     price_range: {
       type: [String],
       default: [],
+    },
+    fake_id: Number,
+    province_id: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: province,
+    },
+    district_id: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: district,
     },
   },
   {

@@ -1,5 +1,3 @@
-const fs = require("fs");
-const axios = require("axios");
 const lstProvince = require("../jsondata/province.json");
 const lstDistrict = require("../jsondata/district.json");
 
@@ -11,72 +9,58 @@ let API_GETDETAIL_RESTAURANT = `https://gappapi.deliverynow.vn/api/delivery/get_
 let lstId = [];
 (async function () {
   // lấy all ID của nhà hàng theo cặp province -lstDistrict
-  lstProvince.forEach((province) => {
+  let lstProvinceTemp = lstProvince.filter(
+    (obj) => obj.id == 217 || obj.id == 218
+  );
+  lstProvinceTemp.forEach((province) => {
     let lstAllDistrict = lstDistrict.filter(
-      (obj) => (obj.province_id = province.id)
+      (obj) => obj.province_id == province.id
     );
-
+    console.log(lstAllDistrict);
     let lstRestaunt = lstAllDistrict.map((district, index) => {
       let promise = new Promise(function (resolve, reject) {
         setTimeout(() => {
           resolve(getRestaunrantID(district));
-        }, 250 * index);
+        }, 1000 * index);
       });
       return promise;
     });
 
-    Promise.all(lstRestaunt).then((res) => console.log(res));
-    // Promise.all(lstRestaunt).then((restaurant) => {
-    //   console.log(restaurant);
-    //   //   fs.writeFile("./user.json", JSON.stringify(product), "utf8", (err) => {
-    //   //     if (err) {
-    //   //       console.log(`Error writing file: ${err}`);
-    //   //     } else {
-    //   //       console.log(`File is written successfully!`);
-    //   //     }
-    //   //   });
-    //   // console.log(product);
-    // });
-
-    // lstAllDistrict.forEach(async (district) => {
-    //   lat = district.lat;
-    //   lng = district.lng;
-    //   districtId = district.id;
-    //   let API_GETALL_RESTAURANT = `https://www.foody.vn/__get/Place/HomeListPlace?t=${new Date().getTime()}&page=1&lat=${lat}&lon=${lng}&count=${12}&districtId=${districtId}&cateId=&cuisineId=&isReputation=&type=1`;
-    //   axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
-    //   const response = await axios(API_GETALL_RESTAURANT);
-    //   const data = response.data;
-    //   if (data) {
-    //     if (data.Items) {
-    //       data.Items.map((obj) => {
-    //         console.log(obj);
-    //         lstId.push(obj.Id);
-    //       });
-    //     }
-    //   }
-    // });
-
-    // gọi API lấy thông tỉnh nhà hàng theo district
+    Promise.all(lstRestaunt).then((res) => {
+      console.log("still running");
+      fs.readFile("./user.json", function (err, data) {
+        JSON.stringify(res);
+        var json = JSON.parse(data);
+        let lstData = [...json];
+        lstData.push(res);
+        fs.writeFile("./user.json", JSON.stringify(lstData), function (err) {
+          if (err) throw err;
+          console.log('The "data to append" was appended to file!');
+        });
+      });
+    });
   });
-  // eslint-disable-next-line prefer-const
-  //   const data = JSON.stringify(Array.prototype.concat([], ...[]));
-  //   fs.writeFileSync("./src/backup/data/College.json", data);
 })();
 
 // console.log(await getProductDetailFromTiki(lstProductID[0]));
-
 async function getRestaunrantID(district) {
   lat = district.lat;
   lng = district.lng;
   districtId = district.id;
   let API_GETALL_RESTAURANT = `https://www.foody.vn/__get/Place/HomeListPlace?t=${new Date().getTime()}&page=1&lat=${lat}&lon=${lng}&count=${12}&districtId=${districtId}&cateId=&cuisineId=&isReputation=&type=1`;
   axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+  let cookie = "";
+  if (district.province_id == 218) cookie = config.cookieHaNoi;
+  if (district.province_id == 217) cookie = config.cookieHCM;
+  axios.defaults.headers.common["Cookie"] = cookie;
   return axios(API_GETALL_RESTAURANT)
     .then((res) => {
+      console.log(res.data.CityId);
       return res.data;
     })
     .catch((error) => {
-      console.log("error", districtId);
+      console.log(error);
+      console.log(API_GETALL_RESTAURANT);
       return { id: error };
     });
 }

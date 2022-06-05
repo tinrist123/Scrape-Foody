@@ -8,6 +8,7 @@ const MenuSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: restaurant,
     },
+    fake_id: Number,
   },
   {
     timestamps: {

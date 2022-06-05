@@ -8,6 +8,7 @@ const DistrictSchema = mongoose.Schema(
       ref: province,
     },
     name: String,
+    fake_id: Number,
   },
   {
     timestamps: {

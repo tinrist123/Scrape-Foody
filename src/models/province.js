@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const ProvinceSchema = mongoose.Schema(
   {
     name: String,
+    fake_id: Number,
   },
   {
     timestamps: {

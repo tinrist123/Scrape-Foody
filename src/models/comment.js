@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
-const restaurant = require("./restaurants");
+const restaurant = require("./restaurant");
 
 const CommentSchema = mongoose.Schema(
   {
-    name: String,
     restaurant_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: restaurant,
     },
     content: String,
+    title: String,
+    avatar_url: String,
+    display_name: String,
+    fake_id: Number,
   },
   {
     timestamps: {
