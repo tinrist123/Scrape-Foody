@@ -1,4 +1,4 @@
-const restaurant = require("../../models/restaurant");
+const Restaurant = require("../../models/restaurant");
 
 const getRestaurantByIndex = async (req, res) => {
   try {
