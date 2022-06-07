@@ -11,6 +11,7 @@ const {
   menu,
   menu_detail,
   restaurant,
+  comment,
 } = require("./src/routes");
 
 const swaggerUi = require("swagger-ui-express");
@@ -60,7 +61,8 @@ app
   .use("/district", district)
   .use("/menu", menu)
   .use("/restaurant", restaurant)
-  .use("/menu_detail", menu_detail);
+  .use("/menu_detail", menu_detail)
+  .use("/comment", comment);
 
 app.use("*", (req, res) => {
   return res.status(404).json({
