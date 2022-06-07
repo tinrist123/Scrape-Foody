@@ -5,7 +5,7 @@ const getMenuByRestaurantID = async (req, res) => {
     const { restaurant_ID } = req.params;
     console.log(restaurant_ID);
     const menuOfRestaurant = await Menu.find({
-      restaurant_ID: restaurant_ID,
+      restaurant_id: restaurant_ID,
     }).populate("restaurant_id");
 
     if (menuOfRestaurant) {
