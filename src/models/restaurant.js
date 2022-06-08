@@ -19,18 +19,7 @@ const RestaurantSchema = mongoose.Schema(
     phone: String,
     rating: Number,
     short_description: String,
-    photos: [
-      {
-        type: [
-          {
-            width: Number,
-            height: Number,
-            value: String,
-          },
-        ],
-        default: [],
-      },
-    ],
+    photos: [String],
     lat: Number,
     lng: Number,
     price_range: {
