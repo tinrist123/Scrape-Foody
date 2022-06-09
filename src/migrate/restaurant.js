@@ -27,13 +27,7 @@ const migrateRestaurant = async () => {
 
     if (restaurant.res_photos) {
       if (restaurant.res_photos.length > 0) {
-        photo = restaurant.res_photos.map((obj) =>
-          obj.photos.map((photo) => ({
-            width: photo.width,
-            value: photo.value,
-            height: photo.height,
-          }))
-        );
+        photo = restaurant.res_photos.map((obj) => obj.photos[5].value);
       }
     }
     // console.log(photo);

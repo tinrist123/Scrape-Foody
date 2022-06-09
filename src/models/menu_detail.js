@@ -11,18 +11,7 @@ const MenuDetailSchema = mongoose.Schema(
     description: String,
     price: String,
     discount_price: String,
-    photo: [
-      {
-        type: [
-          {
-            width: Number,
-            height: Number,
-            value: String,
-          },
-        ],
-        default: [],
-      },
-    ],
+    photo: String,
     fake_id: Number,
   },
   {

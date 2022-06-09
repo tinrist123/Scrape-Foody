@@ -1,12 +1,11 @@
-const Menu = require("../../models/menu");
+const Comment = require("../../models/comment");
 
-const getMenuByRestaurantID = async (req, res) => {
+const GetByRestaurantID = async (req, res) => {
   try {
     const { restaurant_ID } = req.params;
-    console.log(restaurant_ID);
-    const menuOfRestaurant = await Menu.find({
+    const menuOfRestaurant = await Comment.find({
       restaurant_id: restaurant_ID,
-    }).populate("restaurant_id");
+    });
 
     if (menuOfRestaurant) {
       res.status(200).send({
@@ -19,4 +18,4 @@ const getMenuByRestaurantID = async (req, res) => {
   }
 };
 
-module.exports = getMenuByRestaurantID;
+module.exports = GetByRestaurantID;

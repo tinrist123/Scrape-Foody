@@ -2,9 +2,9 @@ const MenuDetail = require("../../models/menu_detail");
 
 const getByID = async (req, res) => {
   try {
-    const { restaurant_ID } = req.params;
+    const { menu_id } = req.params;
     const MenuDetailModel = await MenuDetail.find({
-      _id: restaurant_ID,
+      menu_id: menu_id,
     }).populate("menu_id");
 
     if (MenuDetailModel) {

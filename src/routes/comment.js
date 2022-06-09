@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const { getByResId } = require("../controller/");
+const { GetByRestaurantID } = require("../controller/");
 
 //GET ALL CATEGORIES
-router.get("/:restaurant_ID", getByResId);
+router.get("/:restaurant_ID", GetByRestaurantID);
 
 module.exports = router;
