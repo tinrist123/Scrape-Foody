@@ -3,7 +3,7 @@ const Restaurant = require("../../models/restaurant");
 const getRestaurantByIndex = async (req, res) => {
   try {
     const { pageIndex, pageSize, currentPage } = req.query;
-    const allRestaurant = await Restaurant.find({})
+    const allRestaurant = await restaurant.find({})
       .skip(currentPage * pageIndex)
       .limit(pageSize)
       .populate("province_id")
