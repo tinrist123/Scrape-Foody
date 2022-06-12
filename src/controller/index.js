@@ -6,7 +6,9 @@ const getById = require("./restaurant/getById");
 const getByIndex = require("./restaurant/getByIndex");
 const GetByRestaurantID = require("./comment/GetByRestaurantID");
 const getRecommendRestaurant = require("./restaurant/getRecommend");
-
+const searchRestaurant = require("./restaurant/searchRestaurant");
+const getNearlyRestaurant = require("./restaurant/getNearlyRestaurant");
+const getMostViewRestaurant = require("./restaurant/getMostViewRestaurant")
 
 module.exports = {
   GetAllDistrict,
@@ -16,5 +18,8 @@ module.exports = {
   GetByRestaurantId,
   getByIndex,
   GetByRestaurantID,
-  getRecommendRestaurant
+  getRecommendRestaurant,
+  searchRestaurant,
+  getNearlyRestaurant,
+  getMostViewRestaurant
 };
